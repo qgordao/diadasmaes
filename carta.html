@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cartinha do Dia das Mães</title>
+  <style>
+    body {
+      margin: 0;
+      background: #fff0f5;
+      font-family: 'Segoe UI', sans-serif;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      flex-direction: column;
+      text-align: center;
+    }
+
+    .envelope {
+      width: 200px;
+      height: 120px;
+      background: #ff69b4;
+      position: relative;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+
+    .envelope:hover {
+      transform: scale(1.05);
+    }
+
+    .flap {
+      position: absolute;
+      top: -60px;
+      left: 0;
+      width: 0;
+      height: 0;
+      border-left: 100px solid transparent;
+      border-right: 100px solid transparent;
+      border-bottom: 60px solid #ff69b4;
+    }
+
+    .message {
+      display: none;
+      margin-top: 20px;
+      padding: 20px;
+      max-width: 600px;
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+      animation: fadeIn 1s ease-in forwards;
+    }
+
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: scale(0.8); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+
+    .rose {
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      background-image: url('https://i.imgur.com/hdKXQGZ.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      animation: explode 2s ease-out forwards;
+    }
+
+    @keyframes explode {
+      0% { transform: scale(0) translate(0, 0); opacity: 1; }
+      100% {
+        transform: scale(1.2) translate(
+          calc(-100px + 200px * var(--x)),
+          calc(-100px + 200px * var(--y))
+        );
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="envelope" onclick="openLetter()">
+    <div class="flap"></div>
+  </div>
+
+  <div class="message" id="message">
+    <h2>Feliz Dia das Mães 💖</h2>
+    <p>Mãe, eu te amo profundamente. Me desculpa por às vezes ser tão difícil de entender. Quero que saiba que estou bem, mesmo quando as palavras faltam.</p>
+    <p>Eu queria poder te dar algo melhor, algo que estivesse à altura de tudo que você faz por mim e pelos nossos filhos, Lorenzo e Lorena.</p>
+    <p>Você é a luz deles, e a minha também. Obrigado por tudo, hoje e sempre.</p>
+    <strong>Com todo meu amor. ❤️</strong>
+  </div>
+
+  <script>
+    function openLetter() {
+      const message = document.getElementById('message');
+      message.style.display = 'block';
+
+      for (let i = 0; i < 20; i++) {
+        const rose = document.createElement('div');
+        rose.classList.add('rose');
+        rose.style.setProperty('--x', Math.random());
+        rose.style.setProperty('--y', Math.random());
+        rose.style.left = '50%';
+        rose.style.top = '50%';
+        document.body.appendChild(rose);
+        setTimeout(() => rose.remove(), 2000);
+      }
+    }
+  </script>
+</body>
+</html>
